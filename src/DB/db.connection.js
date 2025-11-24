@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
 
 const connectionString = process.env.DATABASE_URL;
+
 export const sequelize_config = new Sequelize(connectionString, {
     logging: (log) => console.log('Database logger: ', log), 
 });
