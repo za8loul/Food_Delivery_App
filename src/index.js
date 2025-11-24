@@ -5,7 +5,6 @@ import {db_connection} from "./DB/db.connection.js";
 
 const app = express();
 
-
 // Parsing middleware
 app.use(express.json());
 
