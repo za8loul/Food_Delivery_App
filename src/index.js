@@ -2,14 +2,17 @@ import 'dotenv/config';
 import express from "express";
 import usersController from "./Modules/users.controller.js";
 import {db_connection} from "./DB/db.connection.js";
+import { globalErrorHandler } from './Middlewares/error-handling.middleware.js';
+
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
-
 // Parsing middleware
 app.use(express.json());
+app.use(cookieParser());
 
-// Handle Routes
+// Handle Routes 
 app.use("/users", usersController);
 
 // Database
@@ -17,10 +20,7 @@ db_connection();
 
 
 // Error handling middleware
-app.use((err, req , res , next) => {
-    console.log(err.stack);
-    res.status(500).json({message: "Internal server error"});
-});
+app.use(globalErrorHandler);
 
 // Not found middleware
 app.use((req , res) =>{
