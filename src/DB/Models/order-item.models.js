@@ -1,20 +1,34 @@
 import { DataTypes } from "sequelize";
 import { sequelize_config } from "../db.connection.js";
 
-const Orders = sequelize_config.define(
-  "Order",
+const OrderItem = sequelize_config.define(
+  "OrderItem",
   {
-    status: {
-      type: DataTypes.ENUM("preparing", "on the way", "delivered", "cancelled"),
+    price: {
+      type: DataTypes.FLOAT,
       allowNull: false,
-      defaultValue: "preparing",
       validate: {
-        notEmpty: true,
         notNull: true,
-        isIn: [["preparing", "on the way", "delivered", "cancelled"]],
+        notEmpty: true,
       },
     },
-    user_id: {
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+      },
+    },
+    menu_item_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+      },
+    },
+    order_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -23,19 +37,9 @@ const Orders = sequelize_config.define(
       },
     },
     total_price: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-        notNull: true,
-      },
-    },
-    delivery_address: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-        notNull: true,
+      type: DataTypes.VIRTUAL,
+      get() {
+        return this.quantity * this.price;
       },
     },
   },
@@ -44,4 +48,4 @@ const Orders = sequelize_config.define(
   }
 );
 
-export default Orders;
+export default OrderItem;
