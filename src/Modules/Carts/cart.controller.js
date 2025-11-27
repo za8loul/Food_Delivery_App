@@ -1,15 +1,13 @@
 import { Router } from "express";
-import { authenticate } from "../Middlewares/authentication.middleware.js";
-import { asyncHandler } from "../Utils/async-handler.js";
-import {
-  getCart,
-  addItemToCart,
-  removeItemFromCart,
-  updateItemQuantity,
-  clearCart,
-  emptyCart,
-} from "./cart.services.js";
-import { validateCartItem } from "../Middlewares/validation.middleware.js";
+import { authenticate } from "../../Middlewares/authentication.middleware.js";
+import { asyncHandler } from "../../Utils/async-handler.js";
+import { getCart } from "./cart.services/getCart.service.js";
+import { addItemToCart } from "./cart.services/addItemToCart.service.js";
+import { removeItemFromCart } from "./cart.services/removeItemFromCart.service.js";
+import { updateItemQuantity } from "./cart.services/updateItemQuantity.service.js";
+import { clearCart } from "./cart.services/clearCart.service.js";
+import { emptyCart } from "./cart.services/emptyCart.service.js";
+import { validateCartItem } from "../../Middlewares/validation.middleware.js";
 
 const router = Router();
 

@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from "express";
-import usersController from "./Modules/users.controller.js";
-import cartController from "./Modules/cart.controller.js";
+import usersController from "./Modules/Users/users.controller.js";
+import cartController from "./Modules/Carts/cart.controller.js";
 import {db_connection} from "./DB/db.connection.js";
 import { globalErrorHandler } from './Middlewares/error-handling.middleware.js';
 

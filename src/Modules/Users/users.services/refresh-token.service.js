@@ -1,5 +1,5 @@
-import User from "../../DB/Models/users.model.js";
-import { generateAccessToken, verifyRefreshToken } from "../../Utils/token.utils.js";
+import User from "../../../DB/Models/users.model.js";
+import { generateAccessToken, verifyRefreshToken } from "../../../Utils/token.utils.js";
 
 export const refreshTokenService = async (req, res, next) => {
     const { refreshToken } = req.cookies;
