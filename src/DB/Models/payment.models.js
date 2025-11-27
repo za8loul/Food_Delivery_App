@@ -1,28 +1,18 @@
 import { DataTypes } from "sequelize";
 import { sequelize_config } from "../db.connection.js";
 
-const Orders = sequelize_config.define(
-  "Order",
+const Payment = sequelize_config.define(
+  "Payment",
   {
-    status: {
-      type: DataTypes.ENUM("preparing", "on the way", "delivered", "cancelled"),
-      allowNull: false,
-      defaultValue: "preparing",
-      validate: {
-        notEmpty: true,
-        notNull: true,
-        isIn: [["preparing", "on the way", "delivered", "cancelled"]],
-      },
-    },
-    user_id: {
-      type: DataTypes.INTEGER,
+    method: {
+      type: DataTypes.ENUM("cash", "card"),
       allowNull: false,
       validate: {
         notEmpty: true,
         notNull: true,
       },
     },
-    total_price: {
+    amount: {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
@@ -30,8 +20,17 @@ const Orders = sequelize_config.define(
         notNull: true,
       },
     },
-    delivery_address: {
-      type: DataTypes.STRING,
+    status: {
+      type: DataTypes.ENUM("pending", "completed", "failed"),
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        notNull: true,
+        isIn: [["pending", "completed", "failed"]],
+      },
+    },
+    order_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true,
@@ -44,4 +43,4 @@ const Orders = sequelize_config.define(
   }
 );
 
-export default Orders;
+export default Payment;

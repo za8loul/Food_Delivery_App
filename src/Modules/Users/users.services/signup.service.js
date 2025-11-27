@@ -1,6 +1,6 @@
-import User from "../../DB/Models/users.model.js";
-import { hashPassword } from "../../Utils/encryption.utils.js";
-import { generateAccessToken, generateRefreshToken } from "../../Utils/token.utils.js";
+import User from "../../../DB/Models/users.model.js";
+import { hashPassword } from "../../../Utils/encryption.utils.js";
+import { generateAccessToken, generateRefreshToken } from "../../../Utils/token.utils.js";
 
 export const signupService = async (req, res, next) => {
   const { first_name, last_name, email, password, gender, phone_number, address, role } = req.body;

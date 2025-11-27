@@ -1,20 +1,18 @@
 import { DataTypes } from "sequelize";
 import { sequelize_config } from "../db.connection.js";
 
-const Orders = sequelize_config.define(
-  "Order",
+const MenuItem = sequelize_config.define(
+  "MenuItem",
   {
-    status: {
-      type: DataTypes.ENUM("preparing", "on the way", "delivered", "cancelled"),
+    name: {
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "preparing",
       validate: {
         notEmpty: true,
         notNull: true,
-        isIn: [["preparing", "on the way", "delivered", "cancelled"]],
       },
     },
-    user_id: {
+    category_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -22,7 +20,7 @@ const Orders = sequelize_config.define(
         notNull: true,
       },
     },
-    total_price: {
+    price: {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
@@ -30,9 +28,26 @@ const Orders = sequelize_config.define(
         notNull: true,
       },
     },
-    delivery_address: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+        notNull: true,
+      },
+    },
+    image_url: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        notNull: true,
+      },
+    },
+    is_available: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
       validate: {
         notEmpty: true,
         notNull: true,
@@ -44,4 +59,4 @@ const Orders = sequelize_config.define(
   }
 );
 
-export default Orders;
+export default MenuItem;

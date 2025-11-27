@@ -1,36 +1,33 @@
-import 'dotenv/config';
+import "dotenv/config";
 import express from "express";
+import "./DB/Models/associations.models.js";
 import usersController from "./Modules/users.controller.js";
-import cartController from "./Modules/cart.controller.js";
-import {db_connection} from "./DB/db.connection.js";
-import { globalErrorHandler } from './Middlewares/error-handling.middleware.js';
-
-import cookieParser from 'cookie-parser';
+import { db_connection } from "./DB/db.connection.js";
 
 const app = express();
 
 // Parsing middleware
 app.use(express.json());
-app.use(cookieParser());
 
-// Handle Routes 
+// Handle Routes
 app.use("/users", usersController);
-app.use("/cart", cartController);
 
 // Database
-await db_connection();
-
+db_connection();
 
 // Error handling middleware
-app.use(globalErrorHandler);
+app.use((err, req, res, next) => {
+  console.log(err.stack);
+  res.status(500).json({ message: "Internal server error" });
+});
 
 // Not found middleware
-app.use((req , res) =>{
-    res.status(404).send("Not Found");
+app.use((req, res) => {
+  res.status(404).send("Not Found");
 });
 
 // Server
 const port = +process.env.PORT;
-app.listen(port,()=>{
-    console.log(`Server is running on port ${port}`); 
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });

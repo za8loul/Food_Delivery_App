@@ -1,6 +1,6 @@
-import User from "../../DB/Models/users.model.js";
-import { comparePassword } from "../../Utils/encryption.utils.js";
-import { generateAccessToken, generateRefreshToken } from "../../Utils/token.utils.js";
+import User from "../../../DB/Models/users.model.js";
+import { comparePassword } from "../../../Utils/encryption.utils.js";
+import { generateAccessToken, generateRefreshToken } from "../../../Utils/token.utils.js";
 
 const loginservice = async (req, res, next) => {
   const { email, password } = req.body;

@@ -1,17 +1,23 @@
 import { DataTypes } from "sequelize";
 import { sequelize_config } from "../db.connection.js";
 
-const Orders = sequelize_config.define(
-  "Order",
+const Reviews = sequelize_config.define(
+  "Review",
   {
-    status: {
-      type: DataTypes.ENUM("preparing", "on the way", "delivered", "cancelled"),
+    rating: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: "preparing",
       validate: {
         notEmpty: true,
         notNull: true,
-        isIn: [["preparing", "on the way", "delivered", "cancelled"]],
+      },
+    },
+    comment: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        notNull: true,
       },
     },
     user_id: {
@@ -22,16 +28,8 @@ const Orders = sequelize_config.define(
         notNull: true,
       },
     },
-    total_price: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-        notNull: true,
-      },
-    },
-    delivery_address: {
-      type: DataTypes.STRING,
+    menu_item_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true,
@@ -44,4 +42,4 @@ const Orders = sequelize_config.define(
   }
 );
 
-export default Orders;
+export default Reviews;
