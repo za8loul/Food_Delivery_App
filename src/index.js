@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from "express";
 import usersController from "./Modules/users.controller.js";
+import cartController from "./Modules/cart.controller.js";
 import {db_connection} from "./DB/db.connection.js";
 import { globalErrorHandler } from './Middlewares/error-handling.middleware.js';
 
@@ -14,9 +15,10 @@ app.use(cookieParser());
 
 // Handle Routes 
 app.use("/users", usersController);
+app.use("/cart", cartController);
 
 // Database
-db_connection();
+await db_connection();
 
 
 // Error handling middleware
