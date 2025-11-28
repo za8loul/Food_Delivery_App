@@ -1,13 +1,14 @@
+import cookieParser from "cookie-parser";
 import "dotenv/config";
 import express from "express";
-import cookieParser from "cookie-parser";
+import { db_connection } from "./DB/db.connection.js";
 import "./DB/Models/associations.models.js";
-import usersRouter from "./Modules/Users/users.controller.js";
+import adminController from "./Modules/Admin/admin.controller.js";
+import menuController from "./Modules/Menu/menu.controller.js";
 import ordersController from "./Modules/Orders/orders.controller.js";
 import paymentsController from "./Modules/Payments/payments.controller.js";
 import reviewsController from "./Modules/Reviews/reviews.controller.js";
-import menuController from "./Modules/Menu/menu.controller.js";
-import { db_connection } from "./DB/db.connection.js";
+import usersRouter from "./Modules/Users/users.controller.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/orders", ordersController);
 app.use("/payments", paymentsController);
 app.use("/reviews", reviewsController);
 app.use("/menu", menuController);
+app.use("/admin", adminController);
 
 // Database
 db_connection();
