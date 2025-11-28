@@ -1,45 +1,104 @@
-import cookieParser from "cookie-parser";
-import "dotenv/config";
-import express from "express";
-import { db_connection } from "./DB/db.connection.js";
-import "./DB/Models/associations.models.js";
-import adminController from "./Modules/Admin/admin.controller.js";
-import menuController from "./Modules/Menu/menu.controller.js";
-import ordersController from "./Modules/Orders/orders.controller.js";
-import paymentsController from "./Modules/Payments/payments.controller.js";
-import reviewsController from "./Modules/Reviews/reviews.controller.js";
-import usersRouter from "./Modules/Users/users.controller.js";
+import CartItem from "./cart-items.model.js";
+import Cart from "./cart.model.js";
+import Categories from "./categories.models.js";
+import MenuItem from "./menu-item.models.js";
+import OrderItem from "./order-item.models.js";
+import Orders from "./orders.models.js";
+import Payment from "./payment.models.js";
+import Reviews from "./reviews.models.js";
+import User from "./user.model.js";
 
-const app = express();
+User.hasOne(Cart, { foreignKey: "user_id", as: "cart" });
+Cart.belongsTo(User, { foreignKey: "user_id", as: "user" });
 
-// Parsing middleware
-app.use(express.json());
-app.use(cookieParser());
+Cart.hasMany(CartItem, { foreignKey: "cart_id", as: "items" });
+CartItem.belongsTo(Cart, { foreignKey: "cart_id", as: "cart" });
 
-// Handle Routes
-app.use("/users", usersRouter);
-app.use("/orders", ordersController);
-app.use("/payments", paymentsController);
-app.use("/reviews", reviewsController);
-app.use("/menu", menuController);
-app.use("/admin", adminController);
-
-// Database
-db_connection();
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.log(err.stack);
-  res.status(500).json({ message: "Internal server error" });
+/*
+One user has many orders
+and each order has one user
+*/
+User.hasMany(Orders, {
+  foreignKey: "user_id",
+  as: "orders",
+});
+Orders.belongsTo(User, {
+  foreignKey: "user_id",
+  as: "user",
 });
 
-// Not found middleware
-app.use((req, res) => {
-  res.status(404).send("Not Found");
+/*
+Each user has many reviews
+and each review should have one user
+*/
+User.hasMany(Reviews, {
+  foreignKey: "user_id",
+  as: "reviews",
+});
+Reviews.belongsTo(User, {
+  foreignKey: "user_id",
+  as: "user",
+});
+/*
+Each order has one payment
+and each payment belongs to one order
+*/
+Orders.hasOne(Payment, {
+  foreignKey: "order_id",
+  as: "payment",
+});
+Payment.belongsTo(Orders, {
+  foreignKey: "order_id",
+  as: "order",
+});
+/*
+Each order has one many order-item
+and each order-item belongs to one order
+*/
+Orders.hasMany(OrderItem, {
+  foreignKey: "order_id",
+  as: "items",
 });
 
-// Server
-const port = +process.env.PORT;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+OrderItem.belongsTo(Orders, {
+  foreignKey: "order_id",
+  as: "order",
+});
+
+/*
+Each menu-item has many reviews
+and each reviews belongs to one menu-item
+*/
+
+MenuItem.hasMany(Reviews, {
+  foreignKey: "menu_item_id",
+  as: "reviews",
+});
+Reviews.belongsTo(MenuItem, {
+  foreignKey: "menu_item_id",
+  as: "item",
+});
+/*
+Each order-item is menu-item
+and each menu-item is order-item
+*/
+OrderItem.belongsTo(MenuItem, {
+  foreignKey: "menu_item_id",
+  as: "order_item",
+});
+MenuItem.hasMany(OrderItem, {
+  foreignKey: "menu_item_id",
+  as: "menu_item",
+});
+/*
+Each menu-item has one category
+and each category might have many menu-items
+*/
+MenuItem.belongsTo(Categories, {
+  foreignKey: "category_id",
+  as: "category",
+});
+Categories.hasMany(MenuItem, {
+  foreignKey: "category_id",
+  as: "menu_items",
 });
