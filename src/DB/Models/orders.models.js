@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import { sequelize_config } from "../db.connection.js";
 
 const Orders = sequelize_config.define(
-  "Order",
+  "Orders",
   {
     status: {
       type: DataTypes.ENUM("preparing", "on the way", "delivered", "cancelled"),

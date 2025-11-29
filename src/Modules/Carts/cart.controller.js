@@ -7,7 +7,7 @@ import { removeItemFromCart } from "./cart.services/removeItemFromCart.service.j
 import { updateItemQuantity } from "./cart.services/updateItemQuantity.service.js";
 import { clearCart } from "./cart.services/clearCart.service.js";
 import { emptyCart } from "./cart.services/emptyCart.service.js";
-import { validateCartItem } from "../../Middlewares/validation.middleware.js";
+import { validateAddCartItem } from "../../Middlewares/validation.middleware.js";
 
 const router = Router();
 
@@ -29,16 +29,13 @@ router.get(
 router.post(
   "/add",
   authenticate,
-  validateCartItem,
+  validateAddCartItem,
   asyncHandler(async (req, res) => {
-    const { product_id, product_name, quantity, unit_price, notes } = req.body;
+    const { menuItemId, quantity } = req.body;
 
     const cart = await addItemToCart(req.user.id, {
-      product_id,
-      product_name,
+      menuItemId,
       quantity: parseInt(quantity),
-      unit_price: parseFloat(unit_price),
-      notes,
     });
 
     res.status(201).json({

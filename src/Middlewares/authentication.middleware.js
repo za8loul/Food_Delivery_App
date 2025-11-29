@@ -27,6 +27,7 @@ export const authenticate = async (req, res, next) => {
       return next(new AppError("User not found", 404));
     }
 
+    req.auth = decoded;
     req.user = user;
     return next();
   } catch (error) {

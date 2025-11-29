@@ -9,7 +9,7 @@ const CartItem = sequelize_config.define(
       allowNull: false,
       onDelete: "CASCADE",
     },
-    product_id: {
+    menu_item_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

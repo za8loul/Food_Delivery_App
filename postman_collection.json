@@ -1,0 +1,650 @@
+{
+  "info": {
+    "name": "Food Delivery App API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+      {
+        "name": "Carts",
+        "item": [
+          {
+            "name": "Get user's cart",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{baseUrl}}/carts",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "carts"
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Add item to cart",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"product_id\": \"your_product_id\",\n  \"product_name\": \"your_product_name\",\n  \"quantity\": 1,\n  \"unit_price\": 10.00,\n  \"notes\": \"your_notes\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{baseUrl}}/carts/add",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "carts",
+                  "add"
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Update item quantity in cart",
+            "request": {
+              "method": "PATCH",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"quantity\": 2\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{baseUrl}}/carts/items/:itemId",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "carts",
+                  "items",
+                  ":itemId"
+                ],
+                "variable": [
+                  {
+                    "key": "itemId",
+                    "value": "your_item_id"
+                  }
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Remove item from cart",
+            "request": {
+              "method": "DELETE",
+              "header": [],
+              "url": {
+                "raw": "{{baseUrl}}/carts/items/:itemId",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "carts",
+                  "items",
+                  ":itemId"
+                ],
+                "variable": [
+                  {
+                    "key": "itemId",
+                    "value": "your_item_id"
+                  }
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Clear all items from cart",
+            "request": {
+              "method": "DELETE",
+              "header": [],
+              "url": {
+                "raw": "{{baseUrl}}/carts",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "carts"
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Empty cart (for checkout)",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "url": {
+                "raw": "{{baseUrl}}/carts/checkout/empty",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "carts",
+                  "checkout",
+                  "empty"
+                ]
+              }
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Categories",
+        "item": [
+          {
+            "name": "Get all categories",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{baseUrl}}/categories",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "categories"
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Add a new category",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"your_category_name\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{baseUrl}}/categories",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "categories"
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Edit a category",
+            "request": {
+              "method": "PUT",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"new_category_name\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{baseUrl}}/categories/:id",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "categories",
+                  ":id"
+                ],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "your_category_id"
+                  }
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Delete a category",
+            "request": {
+              "method": "DELETE",
+              "header": [],
+              "url": {
+                "raw": "{{baseUrl}}/categories/:id",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "categories",
+                  ":id"
+                ],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "your_category_id"
+                  }
+                ]
+              }
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Dashboard",
+        "item": [
+          {
+            "name": "Get dashboard analytics",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{baseUrl}}/dashboard",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "dashboard"
+                ]
+              }
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Menu",
+        "item": [
+          {
+            "name": "Get all menu items",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{baseUrl}}/menu",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "menu"
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Add a new menu item",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"your_item_name\",\n  \"price\": 10.00,\n  \"category_id\": \"your_category_id\",\n  \"description\": \"your_item_description\",\n  \"image_url\": \"your_image_url\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{baseUrl}}/menu",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "menu"
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Edit a menu item",
+            "request": {
+              "method": "PUT",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"new_item_name\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{baseUrl}}/menu/:id",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "menu",
+                  ":id"
+                ],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "your_item_id"
+                  }
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Delete a menu item",
+            "request": {
+              "method": "DELETE",
+              "header": [],
+              "url": {
+                "raw": "{{baseUrl}}/menu/:id",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "menu",
+                  ":id"
+                ],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "your_item_id"
+                  }
+                ]
+              }
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Orders",
+        "item": [
+          {
+            "name": "Place a new order",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"delivery_address\": \"your_delivery_address\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{baseUrl}}/orders",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "orders"
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Get all orders",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{baseUrl}}/orders",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "orders"
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Update order status",
+            "request": {
+              "method": "PATCH",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"status\": \"preparing\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{baseUrl}}/orders/:id/status",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "orders",
+                  ":id",
+                  "status"
+                ],
+                "variable": [
+                  {
+                    "key": "id",
+                    "value": "your_order_id"
+                  }
+                ]
+              }
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Payments",
+        "item": [
+          {
+            "name": "Create a new payment",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"order_id\": \"your_order_id\",\n  \"amount\": 10.00,\n  \"method\": \"your_payment_method\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{baseUrl}}/payments",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "payments"
+                ]
+              }
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Reviews",
+        "item": [
+          {
+            "name": "Create a new review",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"menu_item_id\": \"your_menu_item_id\",\n  \"rating\": 5,\n  \"comment\": \"your_review_comment\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{baseUrl}}/reviews",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "reviews"
+                ]
+              }
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Users",
+        "item": [
+          {
+            "name": "User login",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"email\": \"your_email\",\n  \"password\": \"your_password\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{baseUrl}}/users/login",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "users",
+                  "login"
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Admin login",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"email\": \"your_admin_email\",\n  \"password\": \"your_admin_password\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{baseUrl}}/users/admin/login",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "users",
+                  "admin",
+                  "login"
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "User signup",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"first_name\": \"your_first_name\",\n  \"last_name\": \"your_last_name\",\n  \"email\": \"your_email\",\n  \"password\": \"your_password\",\n  \"phone_number\": \"your_phone_number\",\n  \"address\": \"your_address\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{baseUrl}}/users/signup",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "users",
+                  "signup"
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Refresh token",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "url": {
+                "raw": "{{baseUrl}}/users/refresh-token",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "users",
+                  "refresh-token"
+                ]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Get all users",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{baseUrl}}/users",
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "path": [
+                  "users"
+                ]
+              }
+            },
+            "response": []
+          }
+        ]
+      }
+    ]
+}
