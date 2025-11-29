@@ -29,6 +29,7 @@ const User = sequelize_config.define(
         allowNull: false,
         validate: {
           isEmail: true,
+          is: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
         },
       },
       password: {
@@ -36,6 +37,17 @@ const User = sequelize_config.define(
         allowNull: false,
         validate: {
           notEmpty: true,
+          isStrongPassword(value) {
+            if (
+              !/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/.test(
+                value
+              )
+            ) {
+              throw new Error(
+                "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+              );
+            }
+          },
         },
       },
       role: {

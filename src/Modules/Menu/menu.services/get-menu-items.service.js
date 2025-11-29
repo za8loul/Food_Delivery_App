@@ -21,6 +21,7 @@ export const getMenuItems = async (req, res, next) => {
     where: filter,
     include: {
       model: Categories,
+      as: "category",
       attributes: ["name"],
     },
   });

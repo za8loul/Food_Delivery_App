@@ -5,7 +5,7 @@ import CartItem from "../../../DB/Models/cart-items.model.js";
 export const getCart = async (userId) => {
   let cart = await Cart.findOne({
     where: { user_id: userId },
-    include: [{ model: CartItem }],
+    include: [{ model: CartItem, as: "items" }],
   });
 
   if (!cart) {
